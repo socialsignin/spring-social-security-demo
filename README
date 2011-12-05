@@ -17,7 +17,7 @@ for persistence of UserConnection data.   This in-memory datasource (configured 
 with custom datasource as necessary.  The PostContruct method in SpringSocialSecurityDemoWebappConfig can be removed if the
 in-memory database is replaced.
 
-To start the application, ensure that your have built and deployed spring-social-security to your maven repository, 
+To start the application, ensure that you have built and deployed spring-social-security to your maven repository, 
 and clone the spring-social-security-demo project.  Once the Twitter and Facebook client details have been populated in the
 environment.properties file, and the Facebook client account has been set up with a return url of http://localhost:8080/connect/facebook,
 the application can be started using the in-built Jetty plugin:
