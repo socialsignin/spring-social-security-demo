@@ -77,12 +77,6 @@ public class SpringSocialSecurityDemoWebappConfig {
 	@Value("${twitter.consumerSecret}")
 	private String twitterConsumerSecret;
 
-	@Value("${soundcloud.consumerKey}")
-	private String soundcloudConsumerKey;
-
-	@Value("${soundcloud.consumerSecret}")
-	private String soundcloudConsumerSecret;
-
 	@Value("${facebook.clientId}")
 	private String facebookClientId;
 
