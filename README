@@ -37,12 +37,12 @@ to spring-social-security for authentication via the springSocialSecurityAuthent
 Users are then asked to login via spring-social, and once they have authenticated with Twitter they are redirected back
 to the application and locally logged in.
 
-The bulk of this application sets up the environment for Spring Social and Spring Security, the spring-social-security
-bridge between these two frameworks is configured in a few lines of configuration
+The bulk of this application sets up the environment for Spring Social and Spring Security, with the spring-social-security
+bridge between these two frameworks being configured with a few lines of configuration:
 
 <code>
 
-  <!-- Start Spring Social Security -->
+  <!-- Start Import of Spring Social Security -->
 	<import resource="classpath:/spring-social-security-config.xml" />
 
 	<!-- Scan classpath for components, including our Social Security Configuration 
@@ -50,20 +50,47 @@ bridge between these two frameworks is configured in a few lines of configuratio
 	<context:component-scan
 		base-package="org.socialsignin.springframework.social.security" />
 
-	<!-- End Spring Social Security -->
+	<!-- End Import of Spring Social Security -->
 
-</code>
+  <!-- configuration of spring security -->
 
-The only additional code which is needed for this spring-social-security demo is the FacebookConnectInterceptor,
-needed because the Spring-Social framework requires API-specific connect interceptors to be registered before
-they can be called.  This interceptor is registered with the ConnectController as below:
+<!-- Note the springSocialSecurityAuthenticationFilter is registered in place of the FORM_LOGIN_FILTER,
+and the entry point for protected resources is defined as the springSocialSecurityEntryPoint -->
 
-<code>
+	<security:http use-expressions="true"
+		entry-point-ref="springSocialSecurityEntryPoint" xmlns="http://www.springframework.org/schema/security">
 
-<bean class="org.springframework.social.connect.web.ConnectController">
-  	<!-- relies on by-type autowiring for the constructor-args -->
+		<intercept-url pattern="/protected/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/oauthconnect.jsp" access="hasRole('ROLE_USER')" />
+		
+
+		<access-denied-handler ref="springSocialSecurityAccessDeniedHandler" />
+		<security:logout logout-url="/logout" />
+
+		<anonymous />
+		<security:custom-filter position="FORM_LOGIN_FILTER"
+			ref="springSocialSecurityAuthenticationFilter" />
+
+	</security:http>
+
+<!-- end configuration of spring security -->
+
+<!-- Configuration of spring social -->
+
+<!-- Note the postSignInUrl is set to /authenticate, the signUp url is set to /signup and a provider specific connect interceptor
+is registered for each post-login connect provider -->
+
+	<bean class="org.springframework.social.connect.web.ProviderSignInController">
+		<constructor-arg value="${application.secureUrl}" />
+		<property name="signUpUrl" value="/signup" />
 		<property name="applicationUrl" value="${application.secureUrl}" />
+		<property name="postSignInUrl" value="/authenticate" />
+		<!-- relies on by-type autowiring for the other constructor-args -->
+	</bean>
 
+	<bean class="org.springframework.social.connect.web.ConnectController">
+		<!-- relies on by-type autowiring for the constructor-args -->
+		<property name="applicationUrl" value="${application.secureUrl}" />
 		<property name="interceptors">
 			<list>
     	    	<ref bean="facebookConnectInterceptor" />
@@ -71,8 +98,14 @@ they can be called.  This interceptor is registered with the ConnectController a
 		</property>
 	</bean>
 
+
+<!-- End configuration of spring social -->
+
 </code>
 
+The only additional code which is needed for this spring-social-security demo is the FacebookConnectInterceptor,
+needed because the Spring-Social framework requires API-specific connect interceptors to be registered before
+they can be called.  This interceptor is registered with the ConnectController as above:
 
 
 
