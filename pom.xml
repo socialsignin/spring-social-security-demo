@@ -8,6 +8,11 @@
 	<name>spring-social-security-demo</name>
 	<url>http://maven.apache.org</url>
 	<repositories>
+		<repository>
+			<id>org.springframework.maven.milestone</id>
+			<name>Spring Maven Milestone Repository</name>
+			<url>http://maven.springframework.org/milestone</url>
+		</repository>
 	</repositories>
 	<dependencies>
 	<dependency>
@@ -63,6 +68,11 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
+			<version>3.1.0.RC3</version>
+		</dependency>
+				<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
 			<version>3.1.0.RC3</version>
 		</dependency>
 		<dependency>
