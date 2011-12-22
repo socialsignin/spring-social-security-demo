@@ -13,6 +13,10 @@
 			<name>Spring Maven Milestone Repository</name>
 			<url>http://maven.springframework.org/milestone</url>
 		</repository>
+ 		<repository>
+	        	<id>opensourceagility-snapshots</id>
+	        	<url>https://github.com/OpenSourceAgility/opensourceagility-mvn-repo/raw/master/snapshots</url>
+	    	</repository>
 	</repositories>
 	<dependencies>
 	<dependency>
