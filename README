@@ -6,7 +6,7 @@ resource (delegation to third party provider for auth, followed by redirect back
 
 /src/main/resources/environment.properties must be populated with Twitter consumer key and secret and Facebook clientId
 and secret for this application to run.   The return url of the Facebook client account must also be configured
-to be the connection url for this application - http://localhost:8080/connect/facebook. As Twitter allows any return
+to be the connection url for this application - http://localhost:8080 . As Twitter allows any return
 url by default, no such requirement is needed for the Twitter client account.
 
 Twitter and Facebook are two arbitrary spring-social providers - alternative providers can be used instead - they
@@ -17,10 +17,9 @@ for persistence of UserConnection data.   This in-memory datasource (configured 
 with custom datasource as necessary.  The PostContruct method in SpringSocialSecurityDemoWebappConfig can be removed if the
 in-memory database is replaced.
 
-To start the application, ensure that you have built and deployed spring-social-security to your maven repository, 
-and clone the spring-social-security-demo project.  Once the Twitter and Facebook client details have been populated in the
-environment.properties file, and the Facebook client account has been set up with a return url of http://localhost:8080/connect/facebook,
-the application can be started using the in-built Jetty plugin:
+To get started , clone the spring-social-security-demo project.  Once the Twitter and Facebook client details have been populated in the
+environment.properties file, and the Facebook client account has been set up with a return url of 
+http://localhost:8080 the application can be started using the in-built Jetty plugin:
 
 mvn jetty:run
 
