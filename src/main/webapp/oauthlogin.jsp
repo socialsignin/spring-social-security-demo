@@ -16,6 +16,11 @@
 	<p><input type="submit" value="Login with Twitter" /></p>
 </form> 
 
+  <form class="login"action="http://localhost:8080/signin/facebook" method="POST">
+	<p><input type="submit" value="Login with Facebook" /></p>
+</form> 
+
+
 </authz:authorize>
 
  <authz:authorize access="hasRole('ROLE_USER')">

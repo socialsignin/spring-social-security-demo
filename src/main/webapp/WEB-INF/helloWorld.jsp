@@ -15,7 +15,7 @@
                        
                        <p>
                       <authz:authorize access="hasRole('ROLE_USER_TWITTER')">
-						You logged in with Twitter. 
+						You are connected with Twitter. 
                     </authz:authorize>
                       <authz:authorize access="hasRole('ROLE_USER_FACEBOOK')">
 						You are connected with Facebook. 
@@ -27,6 +27,9 @@
                     </authz:authorize>
                     <authz:authorize access="hasRole('ROLE_USER') and !hasRole('ROLE_USER_FACEBOOK')">
 						<a href="/oauthconnect.jsp">Connect</a> your account with Facebook
+                    </authz:authorize>
+                    <authz:authorize access="hasRole('ROLE_USER') and !hasRole('ROLE_USER_TWITTER')">
+						<a href="/oauthconnect.jsp">Connect</a> your account with Twitter
                     </authz:authorize>
                     </p>
                  

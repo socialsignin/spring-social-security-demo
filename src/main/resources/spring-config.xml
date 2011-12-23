@@ -95,6 +95,8 @@
 		<property name="interceptors">
 			<list>
     	    	<ref bean="facebookConnectInterceptor" />
+    	    	<ref bean="twitterConnectInterceptor" />
+    	    	
 			</list>
 		</property>
 	</bean>
