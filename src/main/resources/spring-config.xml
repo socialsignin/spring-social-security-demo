@@ -61,7 +61,7 @@
 
 		<intercept-url pattern="/protected/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/oauthconnect.jsp" access="hasRole('ROLE_USER')" />
-		
+
 
 		<access-denied-handler ref="springSocialSecurityAccessDeniedHandler" />
 		<security:logout logout-url="/logout" />
@@ -70,7 +70,21 @@
 		<security:custom-filter position="FORM_LOGIN_FILTER"
 			ref="springSocialSecurityAuthenticationFilter" />
 
+		<remember-me services-ref="springSocialSecurityRememberMeServices"
+			key="springSocialSecurity" />
+
+
 	</security:http>
+
+
+	<bean id="springSocialSecurityRememberMeServices"
+		class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+		<property name="userDetailsService" ref="springSocialSecurityUserDetailsService" />
+		<property name="key" value="springSocialSecurity" />
+		<property name="alwaysRemember" value="true" />
+		<property name="tokenValiditySeconds" value="3600" />
+	</bean>
+
 
 	<!-- End Spring Security -->
 
@@ -94,15 +108,15 @@
 
 		<property name="interceptors">
 			<list>
-    	    	<ref bean="facebookConnectInterceptor" />
-    	    	<ref bean="twitterConnectInterceptor" />
-    	    	
+				<ref bean="facebookConnectInterceptor" />
+				<ref bean="twitterConnectInterceptor" />
+
 			</list>
 		</property>
 	</bean>
 
 	<bean id="usersConnectionRepository"
-		class="org.socialsignin.springframework.social.security.connect.jdbc.SpringSocialSecurityJdbcUsersConnectionRepository">
+		class="org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository">
 		<constructor-arg ref="dataSource" />
 		<constructor-arg ref="connectionFactoryLocator" />
 		<constructor-arg ref="textEncryptor" />
