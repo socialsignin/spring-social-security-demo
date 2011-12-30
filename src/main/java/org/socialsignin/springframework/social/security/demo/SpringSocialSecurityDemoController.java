@@ -17,7 +17,7 @@ public class SpringSocialSecurityDemoController {
 	}
 
 	@RequestMapping("/")
-	public String helloProtectedWorld(Map model) {
+	public String helloPublicWorld(Map model) {
 		model.put("userName", getAuthenticatedUserName());
 
 		// Display on the jsp which security level the page is intended for
@@ -27,7 +27,7 @@ public class SpringSocialSecurityDemoController {
 	}
 
 	@RequestMapping("/protected")
-	public String helloWorld(Map model) {
+	public String helloProtectedWorld(Map model) {
 		model.put("userName", getAuthenticatedUserName());
 
 		// Display on the jsp which security level the page is intended for
