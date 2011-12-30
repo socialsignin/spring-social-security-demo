@@ -20,10 +20,6 @@ Public Area.
 </c:choose>
 </p>
 
-
-
-
-
                     <authz:authorize access="!hasRole('ROLE_USER')">
 						<p>You are not logged in. &nbsp;<a href="/oauthlogin.jsp" />Login</a></p>
                     </authz:authorize>

@@ -1,4 +1,4 @@
-package org.socialsignin.springframework.social.security.demo;
+package org.socialsignin.provider.facebook;
 
 import org.socialsignin.springframework.social.security.signin.SpringSocialSecurityConnectInterceptor;
 import org.springframework.social.facebook.api.Facebook;

@@ -30,6 +30,10 @@
 		class -->
 	<context:component-scan
 		base-package="org.socialsignin.springframework.social.security" />
+		
+			<context:component-scan
+		base-package="org.socialsignin.provider" />
+		
 
 	<!-- End Spring Social Security -->
 
@@ -106,18 +110,14 @@
 		<!-- relies on by-type autowiring for the constructor-args -->
 		<property name="applicationUrl" value="${application.secureUrl}" />
 
-		<property name="interceptors">
-			<list>
-				<ref bean="facebookConnectInterceptor" />
-				<ref bean="twitterConnectInterceptor" />
-			</list>
+		<property name="interceptors" ref="connectInterceptorList">
 		</property>
 	</bean>
 
 	<bean id="usersConnectionRepository"
 		class="org.socialsignin.springframework.social.security.connect.jdbc.SpringSocialSecurityJdbcUsersConnectionRepository">
 		<constructor-arg ref="dataSource" />
-		<constructor-arg ref="connectionFactoryLocator" />
+		<constructor-arg ref="connectionFactoryRegistry" />
 		<constructor-arg ref="textEncryptor" />
 <!-- 
 		Add this connection sign up if implicit local username generation is to be used - ie.

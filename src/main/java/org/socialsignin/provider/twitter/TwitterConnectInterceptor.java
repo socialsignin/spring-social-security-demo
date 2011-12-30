@@ -1,4 +1,4 @@
-package org.socialsignin.springframework.social.security.demo;
+package org.socialsignin.provider.twitter;
 
 import org.socialsignin.springframework.social.security.signin.SpringSocialSecurityConnectInterceptor;
 import org.springframework.social.twitter.api.Twitter;

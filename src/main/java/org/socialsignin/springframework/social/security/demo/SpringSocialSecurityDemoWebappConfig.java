@@ -9,16 +9,12 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
-import org.springframework.social.facebook.connect.FacebookConnectionFactory;
-import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 import org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping;
 
@@ -56,43 +52,20 @@ public class SpringSocialSecurityDemoWebappConfig {
 
 	}
 
-	@Bean
-	public ConnectionFactoryLocator connectionFactoryLocator() {
-		ConnectionFactoryRegistry registry = connectionFactoryRegistry();
-		registry.addConnectionFactory(new TwitterConnectionFactory(
-				twitterConsumerKey, twitterConsumerSecret));
-		registry.addConnectionFactory(new FacebookConnectionFactory(
-				facebookClientId, facebookClientSecret));
-
-		return registry;
-	}
-
+	
 	@Bean
 	public ConnectionFactoryRegistry connectionFactoryRegistry() {
 		return new ConnectionFactoryRegistry();
 	}
 
-	@Value("${twitter.consumerKey}")
-	private String twitterConsumerKey;
-
-	@Value("${twitter.consumerSecret}")
-	private String twitterConsumerSecret;
-
-	
-	@Value("${facebook.clientId}")
-	private String facebookClientId;
-
-	@Value("${facebook.clientSecret}")
-	private String facebookClientSecret;
 
 	@Bean
 	public DefaultAnnotationHandlerMapping handlerMapping() throws Exception {
 
 		DefaultAnnotationHandlerMapping mapping = new DefaultAnnotationHandlerMapping();
-
 		return mapping;
-
 	}
+	
 
 	@Bean
 	public AnnotationMethodHandlerAdapter handlerAdapter() throws Exception {
