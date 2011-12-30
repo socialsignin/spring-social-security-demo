@@ -6,32 +6,47 @@
 </head>
 <body>
 
-<p>Hello World ( <c:out value="${securityLevel}" /> )</p>
+<p>Hello World : 
+
+<c:choose>
+<c:when test="${securityLevel eq 'Protected'}" >
+Protected Area.
+</c:when>
+<c:when test="${securityLevel eq 'Public'}" >
+
+Public Area. 
+<p> <a href="/protected">Attempt to access</a> a protected resource</p>
+</c:when>
+</c:choose>
+</p>
+
+
+
+
 
                     <authz:authorize access="!hasRole('ROLE_USER')">
-						<p>You are not logged in. <a href="/protected"></p>
-						<p>Attempt to access</a> a protected resource</p>
+						<p>You are not logged in. &nbsp;<a href="/oauthlogin.jsp" />Login</a></p>
                     </authz:authorize>
-                       
-                       <p>
+                                  <authz:authorize access="hasRole('ROLE_USER')">
+						You are logged in locally as <c:out value="${userName}" />. &nbsp;<a href="/logout">Logout</a></p>
+						
+                    </authz:authorize>
+                      
                       <authz:authorize access="hasRole('ROLE_USER_TWITTER')">
-						You are connected with Twitter. 
+					 <p>	You are connected with Twitter. </p>
                     </authz:authorize>
                       <authz:authorize access="hasRole('ROLE_USER_FACEBOOK')">
-						You are connected with Facebook. 
+						<p>You are connected with Facebook. </p>
                     </authz:authorize>
-                    
-                      <authz:authorize access="hasRole('ROLE_USER')">
-						You are logged in locally as <c:out value="${userName}" /></p>
-						<p><a href="/logout">Logout</a></p>
-                    </authz:authorize>
+
+           
                     <authz:authorize access="hasRole('ROLE_USER') and !hasRole('ROLE_USER_FACEBOOK')">
-						<a href="/oauthconnect.jsp">Connect</a> your account with Facebook
+						<p><a href="/oauthconnect.jsp">Connect</a> your account with Facebook</p>
                     </authz:authorize>
                     <authz:authorize access="hasRole('ROLE_USER') and !hasRole('ROLE_USER_TWITTER')">
-						<a href="/oauthconnect.jsp">Connect</a> your account with Twitter
+						<p><a href="/oauthconnect.jsp">Connect</a> your account with Twitter</p>
                     </authz:authorize>
-                    </p>
+                       
                  
 </body>                    
 </html>

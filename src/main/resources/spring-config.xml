@@ -110,19 +110,22 @@
 			<list>
 				<ref bean="facebookConnectInterceptor" />
 				<ref bean="twitterConnectInterceptor" />
-
 			</list>
 		</property>
 	</bean>
 
 	<bean id="usersConnectionRepository"
-		class="org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository">
+		class="org.socialsignin.springframework.social.security.connect.jdbc.SpringSocialSecurityJdbcUsersConnectionRepository">
 		<constructor-arg ref="dataSource" />
 		<constructor-arg ref="connectionFactoryLocator" />
 		<constructor-arg ref="textEncryptor" />
-
+<!-- 
+		Add this connection sign up if implicit local username generation is to be used - ie.
+		instead of sending user to a form to confirm their local username we just use the username
+		from the 3rd party
+		
 		<property name="connectionSignUp" ref="springSocialSecurityConnectionSignUp" />
-
+ -->
 	</bean>
 
 	<bean

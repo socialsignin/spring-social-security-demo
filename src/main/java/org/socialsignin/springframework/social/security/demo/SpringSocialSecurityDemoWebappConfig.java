@@ -63,6 +63,7 @@ public class SpringSocialSecurityDemoWebappConfig {
 				twitterConsumerKey, twitterConsumerSecret));
 		registry.addConnectionFactory(new FacebookConnectionFactory(
 				facebookClientId, facebookClientSecret));
+
 		return registry;
 	}
 
@@ -77,6 +78,7 @@ public class SpringSocialSecurityDemoWebappConfig {
 	@Value("${twitter.consumerSecret}")
 	private String twitterConsumerSecret;
 
+	
 	@Value("${facebook.clientId}")
 	private String facebookClientId;
 

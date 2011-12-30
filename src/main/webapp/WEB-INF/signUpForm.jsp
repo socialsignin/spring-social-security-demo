@@ -1,20 +1,17 @@
- <html>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<html>
  <head>
  </head>
  <body>
 
-
-<p>
-The userId returned from your 3rd party provider has already been taken. Please sign up using a different user name</p>
-
-
 <p>Please choose your user name</p>
 
-<form action="" method="post">
-<input type="text" name="userId" />
+<form:form action="" method="post" modelAttribute="signUpForm">
+<form:input path="userName"/>
 <input type="submit" />
 
-</form>
+</form:form>
 
 </body>
 </html>

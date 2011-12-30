@@ -22,6 +22,7 @@
 	<p><input type="submit" value="Connect with Twitter" /></p>
 </form> 
 </authz:authorize>
+
 </body>
 </html>
 

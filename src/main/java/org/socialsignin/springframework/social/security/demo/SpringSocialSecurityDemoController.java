@@ -35,5 +35,7 @@ public class SpringSocialSecurityDemoController {
 
 		return "helloWorld";
 	}
+	
+	
 
 }
