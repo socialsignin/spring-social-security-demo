@@ -9,7 +9,8 @@
 
 <form:form action="" method="post" modelAttribute="signUpForm">
 <form:input path="userName"/>
-<input type="submit" />
+<input type="submit" value="Complete Sign Up"/>
+<form:errors path="*" />
 
 </form:form>
 
