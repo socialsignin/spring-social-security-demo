@@ -67,7 +67,6 @@
 		<intercept-url pattern="/oauthconnect.jsp" access="hasRole('ROLE_USER')" />
 
 
-		<access-denied-handler ref="springSocialSecurityAccessDeniedHandler" />
 		<security:logout logout-url="/logout" />
 
 		<anonymous />

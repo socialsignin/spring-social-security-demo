@@ -18,7 +18,7 @@
 	<repositories>
  		<repository>
 	        	<id>opensourceagility-snapshots</id>
-	        	<url>https://github.com/OpenSourceAgility/opensourceagility-mvn-repo/raw/master/snapshots</url>
+	        	<url>http://repo.opensourceagility.com/snapshots</url>
 	    	</repository>
 	</repositories>
 	<dependencies>
