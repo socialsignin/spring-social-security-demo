@@ -47,7 +47,7 @@ bridge between these two frameworks being configured with a few lines of configu
 	<!-- Scan classpath for components, including our Social Security Configuration 
 		class -->
 	<context:component-scan
-		base-package="org.socialsignin.springframework.social.security" />
+		base-package="org.socialsignin.springsocial.security" />
 
 	<!-- End Import of Spring Social Security -->
 
@@ -63,7 +63,6 @@ and the entry point for protected resources is defined as the springSocialSecuri
 		<intercept-url pattern="/oauthconnect.jsp" access="hasRole('ROLE_USER')" />
 		
 
-		<access-denied-handler ref="springSocialSecurityAccessDeniedHandler" />
 		<security:logout logout-url="/logout" />
 
 		<anonymous />
