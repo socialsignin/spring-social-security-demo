@@ -1,4 +1,4 @@
-package org.socialsignin.springframework.social.security.demo;
+package org.socialsignin.springsocial.security.demo;
 
 import java.util.ArrayList;
 

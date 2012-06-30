@@ -2,7 +2,7 @@ package org.socialsignin.provider;
 
 import javax.annotation.PostConstruct;
 
-import org.socialsignin.springframework.social.security.demo.ConnectInterceptorList;
+import org.socialsignin.springsocial.security.demo.ConnectInterceptorList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.social.connect.ConnectionFactory;

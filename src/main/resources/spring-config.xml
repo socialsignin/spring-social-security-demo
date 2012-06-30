@@ -29,7 +29,7 @@
 	<!-- Scan classpath for components, including our Social Security Configuration 
 		class -->
 	<context:component-scan
-		base-package="org.socialsignin.springframework.social.security" />
+		base-package="org.socialsignin.springsocial.security" />
 		
 			<context:component-scan
 		base-package="org.socialsignin.provider" />
@@ -115,7 +115,7 @@
 	</bean>
 
 	<bean id="usersConnectionRepository"
-		class="org.socialsignin.springframework.social.security.connect.jdbc.SpringSocialSecurityJdbcUsersConnectionRepository">
+		class="org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository">
 		<constructor-arg ref="dataSource" />
 		<constructor-arg ref="connectionFactoryRegistry" />
 		<constructor-arg ref="textEncryptor" />
