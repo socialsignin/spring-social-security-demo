@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:security="http://www.springframework.org/schema/security"
 
@@ -8,7 +9,9 @@
 	xsi:schemaLocation="  http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd        
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd              
                 http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
         		http://www.springframework.org/schema/aop
@@ -28,21 +31,17 @@
 
 	<!-- Scan classpath for components, including our Social Security Configuration 
 		class -->
-	<context:component-scan
-		base-package="org.socialsignin.springsocial.security" />
-		
-			<context:component-scan
-		base-package="org.socialsignin.provider" />
-		
+	<context:component-scan base-package="org.socialsignin.springsocial.security" />
+
+	<context:component-scan base-package="org.socialsignin.provider" />
+
 
 	<!-- End Spring Social Security -->
 
 	<!-- Start Spring Security -->
 
-	<!-- proxy-target-class is needed for secured annotations to be honoured -->
 	<security:global-method-security
-		proxy-target-class="true" secured-annotations="enabled"
-		pre-post-annotations="enabled">
+		proxy-target-class="false" >
 	</security:global-method-security>
 
 
@@ -79,21 +78,33 @@
 
 	</security:http>
 
-
 	<bean id="springSocialSecurityRememberMeServices"
-		class="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices">
+		class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
 		<property name="userDetailsService" ref="springSocialSecurityUserDetailsService" />
+		<property name="tokenRepository" ref="tokenRepository" />
 		<property name="key" value="springSocialSecurity" />
 		<property name="alwaysRemember" value="true" />
 		<property name="tokenValiditySeconds" value="3600" />
 	</bean>
 
+	<bean id="tokenRepository"
+		class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+		<property name="createTableOnStartup" value="true" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 	<!-- End Spring Security -->
 
 
 	<!-- Start Spring Social -->
 
+ 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/> 
+	   
+ 	<!-- Transaction manager for a single JDBC DataSource -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource"><ref local="dataSource"/></property>
+	</bean>
+	  
 
 	<bean class="org.springframework.social.connect.web.ProviderSignInController">
 		<constructor-arg value="${application.secureUrl}" />
@@ -118,13 +129,10 @@
 		<constructor-arg ref="dataSource" />
 		<constructor-arg ref="connectionFactoryRegistry" />
 		<constructor-arg ref="textEncryptor" />
-<!-- 
-		Add this connection sign up if implicit local username generation is to be used - ie.
-		instead of sending user to a form to confirm their local username we just use the username
-		from the 3rd party
-		
-		<property name="connectionSignUp" ref="springSocialSecurityConnectionSignUp" />
- -->
+		<!-- Add this connection sign up if implicit local username generation 
+			is to be used - ie. instead of sending user to a form to confirm their local 
+			username we just use the username from the 3rd party <property name="connectionSignUp" 
+			ref="springSocialSecurityConnectionSignUp" /> -->
 	</bean>
 
 	<bean
@@ -132,7 +140,7 @@
 		id="connectionRepository" factory-method="createConnectionRepository"
 		factory-bean="usersConnectionRepository" scope="request">
 		<constructor-arg value="#{request.userPrincipal.name}" />
-		<aop:scoped-proxy proxy-target-class="true" />
+		<aop:scoped-proxy proxy-target-class="false" />
 	</bean>
 
 
