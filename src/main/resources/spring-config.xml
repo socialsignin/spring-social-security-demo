@@ -7,13 +7,13 @@
 
 
 	xsi:schemaLocation="  http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
          http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd              
                 http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
         		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
         http://www.springframework.org/schema/security
@@ -25,9 +25,6 @@
 			<value>classpath:environment.properties</value>
 		</property>
 	</bean>
-
-	<!-- Start Spring Social Security -->
-	<import resource="classpath:/spring-social-security-config.xml" />
 
 	<!-- Scan classpath for components, including our Social Security Configuration 
 		class -->
@@ -62,8 +59,14 @@
 	<security:http use-expressions="true"
 		entry-point-ref="springSocialSecurityEntryPoint" xmlns="http://www.springframework.org/schema/security">
 
+		<intercept-url pattern="/protected/twitter" access="hasRole('ROLE_USER_TWITTER')" />
+		<intercept-url pattern="/protected/facebook" access="hasRole('ROLE_USER_FACEBOOK')" />
+		<intercept-url pattern="/protected/facebookTwitter" access="hasRole('ROLE_USER_FACEBOOK') and hasRole('ROLE_USER_TWITTER')" />
 		<intercept-url pattern="/protected/**" access="hasRole('ROLE_USER')" />
+		
 		<intercept-url pattern="/oauthconnect.jsp" access="hasRole('ROLE_USER')" />
+
+        <access-denied-handler ref="springSocialSecurityAccessDeniedHandler"/>
 
 
 		<security:logout logout-url="/logout" />
@@ -77,6 +80,13 @@
 
 
 	</security:http>
+
+	
+	<bean id="springSocialSecurityEntryPoint"
+  		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+ 		<property name="loginFormUrl" value="/oauthlogin.jsp"/>
+	</bean>
+	
 
 	<bean id="springSocialSecurityRememberMeServices"
 		class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">

@@ -9,14 +9,18 @@
 <p>Hello World : 
 
 <c:choose>
-<c:when test="${securityLevel eq 'Protected'}" >
-Protected Area.
-</c:when>
 <c:when test="${securityLevel eq 'Public'}" >
 
 Public Area. 
 <p> <a href="/protected">Attempt to access</a> a protected resource</p>
+<p> <a href="/protected/twitter">Attempt to access</a> a Twitter protected resource</p>
+<p> <a href="/protected/facebook">Attempt to access</a> a Facebook protected resource</p>
+<p> <a href="/protected/facebookTwitter">Attempt to access</a> a Facebook and Twitter protected resource</p>
+
 </c:when>
+<c:otherwise>
+<c:out value="${securityLevel}" /></p><p> <a href="/" >Home</a>
+</c:otherwise>
 </c:choose>
 </p>
 

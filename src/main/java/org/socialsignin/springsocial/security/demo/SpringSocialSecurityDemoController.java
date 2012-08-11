@@ -36,6 +36,36 @@ public class SpringSocialSecurityDemoController {
 		return "helloWorld";
 	}
 	
+	@RequestMapping("/protected/twitter")
+	public String helloTwitterProtectedWorld(Map model) {
+		model.put("userName", getAuthenticatedUserName());
+
+		// Display on the jsp which security level the page is intended for
+		model.put("securityLevel", "Twitter Protected");
+
+		return "helloWorld";
+	}
+	
+	@RequestMapping("/protected/facebook")
+	public String helloFacebookProtectedWorld(Map model) {
+		model.put("userName", getAuthenticatedUserName());
+
+		// Display on the jsp which security level the page is intended for
+		model.put("securityLevel", "Facebook Protected");
+
+		return "helloWorld";
+	}
+	
+	@RequestMapping("/protected/facebookTwitter")
+	public String helloFacebookAndTwitterProtectedWorld(Map model) {
+		model.put("userName", getAuthenticatedUserName());
+
+		// Display on the jsp which security level the page is intended for
+		model.put("securityLevel", "Facebook and Twitter Protected");
+
+		return "helloWorld";
+	}
+	
 	
 
 }
