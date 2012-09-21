@@ -8,17 +8,17 @@
 	<name>spring-social-security-demo</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<org.springframework.version>3.1.1.RELEASE</org.springframework.version>
+		<org.springframework.version>3.1.2.RELEASE</org.springframework.version>
 		<org.springframework.social.version>1.0.2.RELEASE</org.springframework.social.version>
-		<org.springframework.social.facebook.version>1.0.1.RELEASE</org.springframework.social.facebook.version>
-		<org.springframework.security.version>3.1.0.RELEASE</org.springframework.security.version>
-		<org.socialsignin.spring.security.version>1.0.2-SNAPSHOT</org.socialsignin.spring.security.version>
+		<org.springframework.social.facebook.version>1.0.2.RELEASE</org.springframework.social.facebook.version>
+		<org.springframework.security.version>3.1.2.RELEASE</org.springframework.security.version>
+		<org.socialsignin.spring.security.version>1.0.2.RELEASE</org.socialsignin.spring.security.version>
 		
 	</properties>
 	<repositories>
  		<repository>
 	        	<id>opensourceagility-snapshots</id>
-	        	<url>http://repo.opensourceagility.com/snapshots</url>
+	        	<url>http://repo.opensourceagility.com/releases</url>
 	    	</repository>
 	</repositories>
 	<dependencies>
