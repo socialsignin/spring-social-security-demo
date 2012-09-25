@@ -4,12 +4,11 @@ Spring Social Security Demo
 Simple Hello World Webapp demonstrating the <a href="https://github.com/socialsignin/spring-social-security">
 spring-social-security</a> module.
 
-Demonstrates delegating to Twitter/Facebook for login for a webapp, and 
-enables the logged-in user to connect with an additional provider once they have logged in.
+Resources in the application are protected using provider specific roles such has ROLE_USER_TWITTER or ROLE_USER_FACEBOOK, or
+simply by ROLE_USER.
 
-Also demonstrates authentication flow on a non-authorized user attempting to access a 
-protected resource (delegation to third party provider for authentication, 
-followed by redirect back to locally protected url).
+Spring Security is configured with the SpringSocialSecurityAuthenticationFilter which ensures that users attempting to
+access a protected resource are prompted to connect with the relevant SaaS provider in order to authenticate.  
 
 Running the demo
 ----------------
