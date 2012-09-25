@@ -54,69 +54,15 @@ bridge between these two frameworks being configured with a few lines of configu
 ```
 
   <!-- Start Import of Spring Social Security -->
-  <import resource="classpath:/spring-social-security-config.xml" />
 
 	<!-- Scan classpath for components, including our Social Security Configuration 
 		class -->
 	<context:component-scan
 		base-package="org.socialsignin.springsocial.security" />
 
-	<!-- End Import of Spring Social Security -->
+   <!-- End Import of Spring Social Security -->
 ```
 ```
-  <!-- configuration of spring security -->
-
-<!-- Note the springSocialSecurityAuthenticationFilter is registered in place of the FORM_LOGIN_FILTER,
-and the entry point for protected resources is defined as the springSocialSecurityEntryPoint -->
-
-  Simple Hello World Webapp demonstrating spring-social-security module.
-
-Demonstrates delegating to Twitter/Facebook for login for a webapp, and subsequent connection of locally logged in user accounts
-to Facebook/Twitter (depending on which provider was used to log in).   Also demonstrates authentication flow on a non-authorized user attempting to access a protected resource (delegation to third party provider for auth, followed by redirect back to locally protected url).
-
-/src/main/resources/environment.properties must be populated with Twitter consumer key and secret and Facebook clientId
-and secret for this application to run.   The return url of the Facebook client account must also be configured
-to be the connection url for this application - http://localhost:8080/ . As Twitter allows any return
-url by default, no such requirement is needed for the Twitter client account.
-
-Twitter and Facebook are two arbitrary spring-social providers - alternative providers can be used instead - they
-must simply be registered in place of the Twitter/Facebook connection factory classes in SpringSocialSecurityDemoWebappConfig.
-
-This webapp consists of a basic implementation of Spring Social framework, configured with an in-memory datasource
-for persistence of UserConnection data.   This in-memory datasource (configured in spring-config.xml) can be replaced
-with custom datasource as necessary.  The PostContruct method in SpringSocialSecurityDemoWebappConfig can be removed if the
-in-memory database is replaced.
-
-To get started , clone the spring-social-security-demo project.  Once the Twitter and Facebook client details have been populated in the
-environment.properties file, and the Facebook client account has been set up with a return url of 
-http://localhost:8080 the application can be started using the in-built Jetty plugin:
-
-mvn jetty:run
-
-from the base directory of the spring-social-security-demo project.
-
-Access http://localhost:8080/ in your web browser.
-
-The application has two primary pages, the public home page ( http://localhost:8080/ ) and a protected resource
-( http://localhost:8080/protected ).    
-
-Spring Security is configured in the spring-config.xml file to treat the protected url as a protected resource and delegates
-to spring-social-security for authentication via the springSocialSecurityAuthenticationFilter bean.
-
-Users are then asked to login via spring-social, and once they have authenticated with Twitter they are redirected back
-to the application and locally logged in.
-
-The bulk of this application sets up the environment for Spring Social and Spring Security, with the spring-social-security
-bridge between these two frameworks being configured with a few lines of configuration:
-
-```
-	<!-- Scan classpath for components, including our Social Security Configuration 
-		class -->
-	<context:component-scan
-		base-package="org.socialsignin.springsocial.security" />
-
-	<!-- End Import of Spring Social Security -->
-
   <!-- configuration of spring security -->
 
 <!-- Note the springSocialSecurityAuthenticationFilter is registered in place of the FORM_LOGIN_FILTER,
@@ -136,6 +82,12 @@ and the entry point for protected resources is defined as the springSocialSecuri
 			ref="springSocialSecurityAuthenticationFilter" />
 
 	</security:http>
+	
+	<bean id="springSocialSecurityEntryPoint"
+  		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+ 		<property name="loginFormUrl" value="/oauthlogin.jsp"/>
+	</bean>
+	
 
 <!-- end configuration of spring security -->
 
