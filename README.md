@@ -1,11 +1,18 @@
-Simple Hello World Webapp demonstrating spring-social-security module.
+Spring Social Security Demo
+===========================
+
+Simple Hello World Webapp demonstrating the <a href="https://github.com/socialsignin/spring-social-security">
+spring-social-security</a> module.
 
 Demonstrates delegating to Twitter/Facebook for login for a webapp, and 
-enabling the logged-in user to connect with an additional provider once logged in.
+enables the logged-in user to connect with an additional provider once they have logged in.
 
 Also demonstrates authentication flow on a non-authorized user attempting to access a 
 protected resource (delegation to third party provider for authentication, 
 followed by redirect back to locally protected url).
+
+Running the demo
+----------------
 
 /src/main/resources/environment.properties must be populated with Twitter consumer key and secret and Facebook clientId
 and secret for this application to run.   The return url of the Facebook client account must also be configured
@@ -38,6 +45,9 @@ to spring-social-security for authentication via the springSocialSecurityAuthent
 
 Users are then asked to login via spring-social, and once they have authenticated with Twitter they are redirected back
 to the application and locally logged in.
+
+Application overview
+--------------------
 
 The bulk of this application sets up the environment for Spring Social and Spring Security, with the spring-social-security
 bridge between these two frameworks being configured with a few lines of configuration:
