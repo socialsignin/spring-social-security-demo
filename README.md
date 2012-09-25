@@ -1,7 +1,11 @@
 Simple Hello World Webapp demonstrating spring-social-security module.
 
-Demonstrates delegating to Twitter/Facebook for login for a webapp, and subsequent connection of locally logged in user accounts
-to Facebook/Twitter (depending on which provider was used to log in).   Also demonstrates authentication flow on a non-authorized user attempting to access a protected resource (delegation to third party provider for auth, followed by redirect back to locally protected url).
+Demonstrates delegating to Twitter/Facebook for login for a webapp, and 
+enabling the logged-in user to connect with an additional provider once logged in.
+
+Also demonstrates authentication flow on a non-authorized user attempting to access a 
+protected resource (delegation to third party provider for authentication, 
+followed by redirect back to locally protected url).
 
 /src/main/resources/environment.properties must be populated with Twitter consumer key and secret and Facebook clientId
 and secret for this application to run.   The return url of the Facebook client account must also be configured
