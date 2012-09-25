@@ -121,38 +121,4 @@ is registered for each post-login connect provider -->
 
 The only additional code which is needed for this spring-social-security demo is the FacebookConnectInterceptor,
 needed because the Spring-Social framework requires API-specific connect interceptors to be registered before
-they can be called.  This interceptor is registered with the ConnectController as above:
-
-<!-- end configuration of spring security -->
-
-<!-- Configuration of spring social -->
-
-<!-- Note the postSignInUrl is set to /authenticate, the signUp url is set to /signup and a provider specific connect interceptor
-is registered for each post-login connect provider -->
-
-	<bean class="org.springframework.social.connect.web.ProviderSignInController">
-		<constructor-arg value="${application.secureUrl}" />
-		<property name="signUpUrl" value="/signup" />
-		<property name="applicationUrl" value="${application.secureUrl}" />
-		<property name="postSignInUrl" value="/authenticate" />
-		<!-- relies on by-type autowiring for the other constructor-args -->
-	</bean>
-
-	<bean class="org.springframework.social.connect.web.ConnectController">
-		<!-- relies on by-type autowiring for the constructor-args -->
-		<property name="applicationUrl" value="${application.secureUrl}" />
-		<property name="interceptors">
-			<list>
-    	    	<ref bean="facebookConnectInterceptor" />
-			</list>
-		</property>
-	</bean>
-
-
-<!-- End configuration of spring social -->
-
-```
-
-Other than JSP views and configuration classes, the only custom code which is needed for this spring-social-security demo is the FacebookConnectInterceptor,
-needed because the Spring-Social framework requires API-specific connect interceptors to be registered before
-they can be called.  This interceptor is registered with the ConnectController as above:
+they can be called.  This interceptor is registered with the ConnectController as above.
