@@ -10,6 +10,18 @@ simply by ROLE_USER.
 Spring Security is configured with the SpringSocialSecurityAuthenticationFilter which ensures that users attempting to
 access a protected resource are prompted to connect with the relevant SaaS provider in order to authenticate.  
 
+Once authenticated, users confirm their chosen username, a account is created for them, and they can access the protected resource.
+
+Once a user has an account, they can login to the system any time by simply reconnecting with any of the providers
+they have previously connected with the app previously.
+
+Local user account creation is implemented using the default persistence of Spring-Social-Security where local account
+details are stored within the UsersConnectionRepository itself, users are effictively stored as connections to the
+"springSocialSecurity" provider.
+
+This local account creation strategy can be overridden by providing custom implementations of a couple of the components
+from Spring Social Security - see the forked demo at https://github.com/michaellavelle/spring-social-security-demo for an illustration of this.
+
 Running the demo
 ----------------
 
