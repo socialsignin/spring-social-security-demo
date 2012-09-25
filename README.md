@@ -49,7 +49,8 @@ bridge between these two frameworks being configured with a few lines of configu
 		base-package="org.socialsignin.springsocial.security" />
 
 	<!-- End Import of Spring Social Security -->
-
+```
+```
   <!-- configuration of spring security -->
 
 <!-- Note the springSocialSecurityAuthenticationFilter is registered in place of the FORM_LOGIN_FILTER,
@@ -98,8 +99,8 @@ is registered for each post-login connect provider -->
 
 <!-- End configuration of spring social -->
 
-</code>
+```
 
-The only additional code which is needed for this spring-social-security demo is the FacebookConnectInterceptor,
+The only custom code which is needed for this spring-social-security demo is the FacebookConnectInterceptor,
 needed because the Spring-Social framework requires API-specific connect interceptors to be registered before
 they can be called.  This interceptor is registered with the ConnectController as above:
