@@ -19,7 +19,8 @@ Local user account creation is implemented using the default persistence of Spri
 details are stored within the UsersConnectionRepository itself, users are effictively stored as connections to the
 "springSocialSecurity" provider.
 
-This local account creation strategy can be overridden by providing custom implementations of a couple of the components
+This local account creation strategy can be overridden and the local accounts can be persisted using your own domain model
+by providing custom implementations of a couple of the components
 from Spring Social Security - see the forked demo at https://github.com/michaellavelle/spring-social-security-demo for an illustration of this.
 
 Running the demo
