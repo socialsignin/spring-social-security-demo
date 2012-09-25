@@ -101,6 +101,6 @@ is registered for each post-login connect provider -->
 
 ```
 
-The only custom code which is needed for this spring-social-security demo is the FacebookConnectInterceptor,
+Other than JSP views, the only custom code which is needed for this spring-social-security demo is the FacebookConnectInterceptor,
 needed because the Spring-Social framework requires API-specific connect interceptors to be registered before
 they can be called.  This interceptor is registered with the ConnectController as above:
