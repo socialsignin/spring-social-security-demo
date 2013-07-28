@@ -22,11 +22,6 @@ public class FacebookProviderConfig extends AbstractProviderConfig<Facebook> {
 	@Value("${facebook.clientSecret}")
 	private String facebookClientSecret;
 
-	@Override
-	protected ConnectionFactory<Facebook> createConnectionFactory() {
-		return new FacebookConnectionFactory(
-				facebookClientId, facebookClientSecret);
-	}
 
 	@Override
 	protected ConnectInterceptor<Facebook> getConnectInterceptor() {

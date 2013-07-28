@@ -8,17 +8,31 @@ import java.io.Reader;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
+import org.socialsignin.springsocial.security.config.annotation.EnableSpringSocialSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.social.connect.support.ConnectionFactoryRegistry;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.social.UserIdSource;
+import org.springframework.social.config.annotation.EnableJdbcConnectionRepository;
+import org.springframework.social.facebook.config.annotation.EnableFacebook;
+import org.springframework.social.twitter.config.annotation.EnableTwitter;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 import org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @Configuration
+// Swap in the below annotation instead of no-arg version if implicit sign up is required
+//@EnableJdbcConnectionRepository(connectionSignUpRef="springSocialSecurityConnectionSignUp")
+@EnableJdbcConnectionRepository
+@EnableSpringSocialSecurity
+@EnableTwitter(appId = "${twitter.consumerKey}", appSecret = "${twitter.consumerSecret}")
+@EnableFacebook(appId = "${facebook.clientId}", appSecret = "${facebook.clientSecret}")
 public class SpringSocialSecurityDemoWebappConfig {
 
 	@Autowired
@@ -52,25 +66,36 @@ public class SpringSocialSecurityDemoWebappConfig {
 
 	}
 
-	
+	/**
+	 * This is only needed because the official spring-social-security from SpringSocial is on the classpath
+	 * @return
+	 */
 	@Bean
-	public ConnectionFactoryRegistry connectionFactoryRegistry() {
-		return new ConnectionFactoryRegistry();
+	public UserIdSource userIdSource() {
+		return new UserIdSource() {			
+			@Override
+			public String getUserId() {
+				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+				if (authentication == null) {
+					throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
+				}
+				return authentication.getName();
+			}
+		};
 	}
 
-
 	@Bean
-	public DefaultAnnotationHandlerMapping handlerMapping() throws Exception {
+	public RequestMappingHandlerMapping handlerMapping() throws Exception {
 
-		DefaultAnnotationHandlerMapping mapping = new DefaultAnnotationHandlerMapping();
+		 RequestMappingHandlerMapping mapping = new  RequestMappingHandlerMapping();
 		return mapping;
 	}
 	
 
 	@Bean
-	public AnnotationMethodHandlerAdapter handlerAdapter() throws Exception {
+	public RequestMappingHandlerAdapter handlerAdapter() throws Exception {
 
-		AnnotationMethodHandlerAdapter mapping = new AnnotationMethodHandlerAdapter();
+		RequestMappingHandlerAdapter mapping = new RequestMappingHandlerAdapter();
 
 		return mapping;
 

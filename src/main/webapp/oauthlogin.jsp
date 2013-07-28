@@ -20,8 +20,6 @@
 	<p><input type="submit" value="Login with Facebook" /></p>
 </form> 
 
-
-
 </authz:authorize>
 
  <authz:authorize access="hasRole('ROLE_USER')">
