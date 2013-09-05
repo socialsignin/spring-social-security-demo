@@ -18,7 +18,7 @@
 	<repositories>
  		<repository>
 	        	<id>opensourceagility-snapshots</id>
-	        	<url>http://repo.opensourceagility.com/releases</url>
+	        	<url>http://repo.opensourceagility.com/snapshots</url>
 	    	</repository>
 	    	 <repository>
             <id>spring-maven-milestone</id>
