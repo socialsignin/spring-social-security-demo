@@ -5,9 +5,6 @@ import javax.annotation.PostConstruct;
 import org.socialsignin.springsocial.security.demo.ConnectInterceptorList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.social.connect.ConnectionFactory;
-import org.springframework.social.connect.ConnectionFactoryLocator;
-import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ConnectInterceptor;
 
 public abstract class AbstractProviderConfig<S> {
