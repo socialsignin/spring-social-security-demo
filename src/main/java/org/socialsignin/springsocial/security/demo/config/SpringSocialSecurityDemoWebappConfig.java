@@ -59,10 +59,7 @@ public class SpringSocialSecurityDemoWebappConfig {
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.execute(out.toString());
-
-		
 	}
-	
 	
 
 	@Bean
@@ -80,16 +77,5 @@ public class SpringSocialSecurityDemoWebappConfig {
 		return mapping;
 
 	}
-	
-	
-	
-	@PostConstruct
-	// Registers a mechanism for implicit sign up if user id available from provider
-	// Remove if explicit user name selection is required
-	public void registerConnectionSignUp()
-	{
-		//jdbcUsersConnectionRepository.setConnectionSignUp(springSocialSecurityConnnectionSignUp);
-	}
-
 
 }
